@@ -1,0 +1,87 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: docugeniedb_persons_route
+          uri: lb://DOCUGENIEDB
+          predicates:
+            - Path=/api/persons/**
+          filters:
+            - AuthenticationFilter
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
+        - id: docugeniedb_files_route
+          uri: lb://DOCUGENIEDB
+          predicates:
+            - Path=/api/files/**
+          filters:
+            - AuthenticationFilter
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
+        - id: docugeniedb_chats_route
+          uri: lb://DOCUGENIEDB
+          predicates:
+            - Path=/api/chats/**
+          filters:
+            - AuthenticationFilter
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
+        - id: docugeniedb_messages_route
+          uri: lb://DOCUGENIEDB
+          predicates:
+            - Path=/api/messages/**
+          filters:
+            - AuthenticationFilter
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
+        - id: identity-service
+          uri: lb://IDENTITY-SERVICE
+          predicates:
+            - Path=/auth/**
+          filters:
+            - AuthenticationFilter
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
+        - id: bot-app
+          uri: http://localhost:5000
+          predicates:
+            - Path=/bot/**
+          filters:
+            - AuthenticationFilter
+  application:
+    name: docugenie-gateway
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
