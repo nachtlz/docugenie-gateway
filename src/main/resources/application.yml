@@ -28,6 +28,7 @@ spring:
               allowedMethods:
                 - GET
                 - POST
+                - DELETE
               allowedHeaders: '*'
               maxAge: 30
         - id: docugeniedb_chats_route
@@ -42,6 +43,8 @@ spring:
               allowedMethods:
                 - GET
                 - POST
+                - DELETE
+                - PUT
               allowedHeaders: '*'
               maxAge: 30
         - id: docugeniedb_messages_route
@@ -56,6 +59,7 @@ spring:
               allowedMethods:
                 - GET
                 - POST
+                - DELETE
               allowedHeaders: '*'
               maxAge: 30
         - id: identity-service
@@ -78,6 +82,14 @@ spring:
             - Path=/bot/**
           filters:
             - AuthenticationFilter
+          metadata:
+            cors:
+              allowedOrigins: '*'
+              allowedMethods:
+                - GET
+                - POST
+              allowedHeaders: '*'
+              maxAge: 30
   application:
     name: docugenie-gateway
 

@@ -16,9 +16,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
     @Autowired
     private RouteValidator validator;
 
-//    @Autowired
-//    private RestTemplate template;
-
     @Autowired
     private JwtUtil jwtUtil;
 
@@ -41,7 +38,6 @@ public class AuthenticationFilter extends AbstractGatewayFilterFactory<Authentic
                     String token = authHeader.substring(7);
 
                     try {
-                        //template.getForObject("http://IDENTITY-SERVICE/validate?token=" + token, String.class);
                         jwtUtil.validateToken(token);
                     } catch (Exception e) {
                         throw new RuntimeException("Unauthorized access to application.");
